@@ -20,7 +20,7 @@
     	<Button fx:id="btnMwSt" text="Ohne MwSt" onAction="#btnToggleMwSt" />
         <Button text="Refresh" onAction="#btnRefreshArtikel"/>
     </HBox>
-    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1" editable="true">
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
             <TableColumn fx:id="artikelIDColumn" text="ArtikelID" prefWidth="100">
                 <cellValueFactory>
@@ -46,7 +46,7 @@
     </TableView>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="2">
         <TextField fx:id="artikelIDField" promptText="ArtikelID" prefWidth="90"/>
-        <ComboBox fx:id="bezeichnungBox" promptText="Bezeichnung" prefWidth="150">
+        <ComboBox editable="true" fx:id="bezeichnungBox" promptText="Bezeichnung" prefWidth="150">
         	<items>
         		<FXCollections fx:factory="observableArrayList">
         			<String fx:value="Gummistiefel" />

@@ -1,5 +1,6 @@
 package de.pssq.akzeptanztest.pssq_akzeptanztest_02.gui;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,7 +51,7 @@ public class BasisControl implements Initializable {
 	@FXML
 	public void addArtikel() {
 		if (!this.artikelIDField.getText().isEmpty() && !this.lagerbestandField.getText().isEmpty()
-				&& !this.bezeichnungBox.getSelectionModel().isEmpty() && !this.preisField.getText().isEmpty()) {
+				&& !this.bezeichnungBox.getValue().isEmpty() && !this.preisField.getText().isEmpty()) {
 			Artikel artikel = new Artikel(Integer.parseInt(this.artikelIDField.getText()),
 					this.bezeichnungBox.getSelectionModel().selectedItemProperty().getValue(),
 					Integer.parseInt(this.lagerbestandField.getText()), Double.parseDouble(this.preisField.getText()));
@@ -65,17 +65,7 @@ public class BasisControl implements Initializable {
 		}
 		this.artikelIDField.setText("");
 		this.bezeichnungBox.getSelectionModel().clearSelection();
-		this.bezeichnungBox.setButtonCell(new ListCell<>() {
-			@Override
-			protected void updateItem(String item, boolean empty) {
-				super.updateItem(item, empty);
-				if (item == null || empty) {
-					setText(bezeichnungBox.getPromptText());
-				} else {
-					setText(item);
-				}
-			}
-		});
+		this.bezeichnungBox.setValue("");
 		this.lagerbestandField.setText("");
 		this.preisField.setText("");
 
@@ -88,6 +78,7 @@ public class BasisControl implements Initializable {
 			Artikel martierteArtikelReihe = this.tableView.getSelectionModel().getSelectedItem();
 			this.basisModel.loescheArtikel(martierteArtikelReihe);
 		}
+		this.refreshArtikel();
 	}
 
 	@FXML
