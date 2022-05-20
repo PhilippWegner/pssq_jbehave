@@ -33,5 +33,4 @@ public class BasisModel {
 	public void setArtikelListe(ObservableList<Artikel> artikelListe) {
 		this.artikelListe = artikelListe;
 	}
-
 }

@@ -10,5 +10,6 @@ module de.pssq.akzeptanztest.pssq_akzeptanztest_02 {
     opens de.pssq.akzeptanztest.pssq_akzeptanztest_02.gui to javafx.fxml, javafx.control, javafx.graphics;
     exports de.pssq.akzeptanztest.pssq_akzeptanztest_02.gui;
     
+    opens de.pssq.akzeptanztest.pssq_akzeptanztest_02.business;
     exports de.pssq.akzeptanztest.pssq_akzeptanztest_02.business;
 }

@@ -51,7 +51,6 @@ public class Artikel {
 
 	@Override
 	public String toString() {
-
 		String output_string = "ArtikelID: " + this.artikelID + "\n" + "Bezeichnung: " + this.bezeichnung + "\n"
 				+ "Lagerbestand: " + this.lagerbestand + "\n" + "Preis: " + this.preis;
 		return output_string;
