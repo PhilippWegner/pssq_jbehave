@@ -1,9 +1,13 @@
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import de.pssq.akzeptanztest.pssq_akzeptanztest_01.business.Artikel?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+
+<?import de.pssq.akzeptanztest.pssq_akzeptanztest_01.business.Artikel?>
+
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml" fx:controller="de.pssq.akzeptanztest.pssq_akzeptanztest_01.gui.BasisControl">
 
     <padding>
@@ -12,8 +16,9 @@
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="0">
     	<Label style="-fx-font: NORMAL 20 Tahoma;" text="ArtikelApp" />
     	<Region prefHeight="10" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-    	<Button text="Löschen" onAction="#loescheArtikel" />
-        <Button text="Refresh" onAction="#refreshArtikel"/>
+    	<Button text="Löschen" onAction="#btnLoescheArtikel" />
+    	<Button fx:id="btnMwSt" text="Ohne MwSt" onAction="#btnToggleMwSt" />
+        <Button text="Refresh" onAction="#btnRefreshArtikel"/>
     </HBox>
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1" editable="true">
         <columns>
@@ -41,7 +46,19 @@
     </TableView>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="2">
         <TextField fx:id="artikelIDField" promptText="ArtikelID" prefWidth="90"/>
-        <TextField fx:id="bezeichnungField" promptText="Bezeichnung" prefWidth="150"/>
+        <ComboBox fx:id="bezeichnungBox" promptText="Bezeichnung" prefWidth="150">
+        	<items>
+        		<FXCollections fx:factory="observableArrayList">
+        			<String fx:value="Gummistiefel" />
+			          <String fx:value="Zelt" />
+			          <String fx:value="Wanderhose" />
+			          <String fx:value="Trekkingschuhe" />
+			          <String fx:value="Rucksack" />
+			          <String fx:value="Seil" />
+			          <String fx:value="Karabiner" />
+        		</FXCollections>
+        	</items>
+        </ComboBox>
         <TextField fx:id="lagerbestandField" promptText="Lagerbestand" prefWidth="90"/>
         <TextField fx:id="preisField" promptText="Preis" prefWidth="90"/>
         <Button text="Hinzufuegen" onAction="#addArtikel"/>

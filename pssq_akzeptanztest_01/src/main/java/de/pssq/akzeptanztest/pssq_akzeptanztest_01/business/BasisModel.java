@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 public class BasisModel {
 
 	private static BasisModel basisModel;
+	private ObservableList<Artikel> artikelListe = FXCollections.observableArrayList();
 
 	public static BasisModel getInstance() {
 		if (basisModel == null) {
@@ -15,8 +16,6 @@ public class BasisModel {
 	}
 
 	private BasisModel() {}
-	
-	private ObservableList<Artikel> artikelListe = FXCollections.observableArrayList();
 
 	public void fuegeArtikelHinzu(Artikel artikel) {
 		this.artikelListe.add(artikel);
@@ -27,7 +26,7 @@ public class BasisModel {
 	}
 	
 	public ObservableList<Artikel> getArtikelListe() {
-		return artikelListe;
+		return this.artikelListe;
 	}
 
 	public void setArtikelListe(ObservableList<Artikel> artikelListe) {

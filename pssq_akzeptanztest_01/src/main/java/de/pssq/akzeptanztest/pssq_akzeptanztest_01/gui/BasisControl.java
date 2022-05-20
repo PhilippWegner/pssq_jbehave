@@ -2,18 +2,16 @@ package de.pssq.akzeptanztest.pssq_akzeptanztest_01.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,60 +33,96 @@ public class BasisControl implements Initializable {
 	@FXML
 	private TextField artikelIDField;
 	@FXML
-	private TextField bezeichnungField;
+	private ComboBox<String> bezeichnungBox;
 	@FXML
 	private TextField lagerbestandField;
 	@FXML
 	private TextField preisField;
+	@FXML
+	private Button btnMwSt;
 
 	private BasisModel basisModel;
+	private boolean mitMwSt = true;
 
 	public BasisControl() {
 		this.basisModel = BasisModel.getInstance();
 	}
 
 	@FXML
-	public void addArtikel(ActionEvent event) {
-
-		if (!artikelIDField.getText().isEmpty() && !bezeichnungField.getText().isEmpty()
-				&& !lagerbestandField.getText().isEmpty() && !preisField.getText().isEmpty()) {
-			Artikel artikel = new Artikel(Integer.parseInt(artikelIDField.getText()), bezeichnungField.getText(),
-					Integer.parseInt(lagerbestandField.getText()), Double.parseDouble(preisField.getText()));
-
+	public void addArtikel() {
+		if (!this.artikelIDField.getText().isEmpty() && !this.lagerbestandField.getText().isEmpty()
+				&& !this.bezeichnungBox.getSelectionModel().isEmpty() && !this.preisField.getText().isEmpty()) {
+			Artikel artikel = new Artikel(Integer.parseInt(this.artikelIDField.getText()),
+					this.bezeichnungBox.getSelectionModel().selectedItemProperty().getValue(),
+					Integer.parseInt(this.lagerbestandField.getText()), Double.parseDouble(this.preisField.getText()));
 			this.basisModel.fuegeArtikelHinzu(artikel);
-
 		} else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("Eintrag hinzufuegen");
-			alert.setHeaderText("Daten unvollstaendig.");
-			alert.setContentText("Bitte Daten vervollstaendigen.");
+			alert.setTitle("Eintrag hinzufügen");
+			alert.setHeaderText("Daten unvollständig.");
+			alert.setContentText("Bitte Daten vervollständigen.");
 			alert.show();
 		}
-
 		this.artikelIDField.setText("");
-		this.bezeichnungField.setText("");
+		this.bezeichnungBox.getSelectionModel().clearSelection();
+		this.bezeichnungBox.setButtonCell(new ListCell<>() {
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || empty) {
+					setText(bezeichnungBox.getPromptText());
+				} else {
+					setText(item);
+				}
+			}
+		});
 		this.lagerbestandField.setText("");
 		this.preisField.setText("");
 
 		this.refreshArtikel();
 	}
-	
+
 	@FXML
-	public void loescheArtikel(ActionEvent event) {
-		if(this.tableView.getSelectionModel().getSelectedItem() != null) {
+	public void btnLoescheArtikel() {
+		if (this.tableView.getSelectionModel().getSelectedItem() != null) {
 			Artikel martierteArtikelReihe = this.tableView.getSelectionModel().getSelectedItem();
 			this.basisModel.loescheArtikel(martierteArtikelReihe);
 		}
-		
 	}
 
 	@FXML
-	public void refreshArtikel(ActionEvent event) {
+	public void btnRefreshArtikel() {
+		this.refreshArtikel();
+	}
+
+	@FXML
+	public void btnToggleMwSt() {
+		ObservableList<Artikel> artikelListe = FXCollections.observableArrayList();
+		for (Artikel artikel : this.getArtikelListe()) {
+			double preis = artikel.getPreis();
+			if (this.mitMwSt) {
+				artikel.setPreis(preis / 1.19);
+				this.btnMwSt.setText("Mit MwSt");
+			} else {
+				artikel.setPreis(preis * 1.19);
+				this.btnMwSt.setText("Ohne MwSt");
+			}
+			artikelListe.add(artikel);
+		}
+		this.tableView.getItems().clear();
+		this.basisModel.setArtikelListe(artikelListe);
+		this.mitMwSt = !this.mitMwSt;
 		this.refreshArtikel();
 	}
 
 	public ObservableList<Artikel> getArtikelListe() {
-		return this.basisModel.getArtikelListe();
+		ObservableList<Artikel> artikelListe = FXCollections.observableArrayList();
+		for (Artikel artikel : this.basisModel.getArtikelListe()) {
+			double roundedPreis = Math.round(artikel.getPreis() * 100.0) / 100.0;
+			artikel.setPreis(roundedPreis);
+			artikelListe.add(artikel);
+		}
+		return artikelListe;
 	}
 
 	public void refreshArtikel() {
@@ -97,13 +131,10 @@ public class BasisControl implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-
 		artikelIDColumn.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("artikelID"));
 		bezeichnungColumn.setCellValueFactory(new PropertyValueFactory<Artikel, String>("bezeichnung"));
 		lagerbestandColumn.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("lagerbestand"));
 		preisColumn.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("preis"));
-
 		this.refreshArtikel();
 	}
-
 }
