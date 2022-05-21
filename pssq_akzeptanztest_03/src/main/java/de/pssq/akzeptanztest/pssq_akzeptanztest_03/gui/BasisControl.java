@@ -123,10 +123,6 @@ public class BasisControl implements Initializable {
 			return preis * 1.19;
 		}
 	}
-	
-	public double mitMwSt(double preis) {
-		return preis * 1.19;
-	}
 
 	public ObservableList<Artikel> getArtikelListe() {
 		ObservableList<Artikel> artikelListe = FXCollections.observableArrayList();
