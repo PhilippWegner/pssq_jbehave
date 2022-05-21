@@ -16,27 +16,27 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 
+/**
+ * JbehaveRunner: parse stories, run scenarios (JbehaveSteps) and generate
+ * reports
+ */
 public class JbehaveRunner extends JUnitStories {
-
 	@Override
 	public Configuration configuration() {
-		return new MostUsefulConfiguration()
-				.useStoryReporterBuilder(new StoryReporterBuilder()
-						.withPathResolver(new FilePrintStreamFactory.ResolveToSimpleName()).withFormats(Format.CONSOLE))
+		return new MostUsefulConfiguration().useStoryReporterBuilder(
+				new StoryReporterBuilder().withPathResolver(new FilePrintStreamFactory.ResolveToSimpleName())
+						.withFormats(Format.CONSOLE, Format.HTML))
 				.useStoryLoader(new LoadFromURL());
 	}
 
 	@Override
 	public List<String> storyPaths() {
-		// TODO Auto-generated method stub
 		return new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("").getFile(),
 				Collections.singletonList("**/*.story"), new ArrayList<String>(), "file:");
 	}
 
 	@Override
 	public InjectableStepsFactory stepsFactory() {
-		return new InstanceStepsFactory(configuration(), 
-				new MwStBerechnungSteps());
+		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps());
 	}
-
 }

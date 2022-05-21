@@ -2,6 +2,7 @@ package de.pssq.akzeptanztest.pssq_akzeptanztest_03.jbehave;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -37,5 +38,10 @@ public class MwStBerechnungSteps {
 	public void thenTheOutdoorArticlePriceShouldBenetprice(double netprice) {
 		assertThat("Die Nettopreisberechnung ist nicht korrekt.", Math.abs(this.artikel.getPreis() - netprice) <= 0.01);
 //		assertThat("Die Nettopreisberechnung ist nicht korrekt.", false);
+	}
+
+	@AfterStory
+	public void openReport() {
+		System.out.println("DONE!");
 	}
 }
