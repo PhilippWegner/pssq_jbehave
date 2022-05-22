@@ -71,13 +71,11 @@ public class Stories extends JUnitStories {
 		embedderControls.useThreads(1);
 	}
 
-	@SuppressWarnings("exports")
 	@Override
 	public Configuration configuration() {
 		return configuration;
 	}
 
-	@SuppressWarnings("exports")
 	@Override
 	public InjectableStepsFactory stepsFactory() {
 		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps());

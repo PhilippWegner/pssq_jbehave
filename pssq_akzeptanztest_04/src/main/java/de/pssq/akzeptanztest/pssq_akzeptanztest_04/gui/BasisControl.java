@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import de.pssq.akzeptanztest.pssq_akzeptanztest_04.business.Artikel;
 import de.pssq.akzeptanztest.pssq_akzeptanztest_04.business.BasisModel;
 
+@SuppressWarnings("restriction")
 public class BasisControl implements Initializable {
 	@FXML
 	private TableColumn<Artikel, Integer> artikelIDColumn;

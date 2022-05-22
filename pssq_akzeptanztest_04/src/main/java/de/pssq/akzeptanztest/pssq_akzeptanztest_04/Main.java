@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX App
  */
+@SuppressWarnings("restriction")
 public class Main extends Application {
 
 	@Override
