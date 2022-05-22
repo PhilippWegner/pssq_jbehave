@@ -78,11 +78,11 @@ public class Stories extends JUnitStories {
 
 	@Override
 	public InjectableStepsFactory stepsFactory() {
-		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps());
+		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps());
 	}
 
 	@Override
 	protected List<String> storyPaths() {
-		return Arrays.asList("jbehave-stories/MwStBerechnung.story");
+		return Arrays.asList("jbehave-stories/MwStBerechnung.story", "jbehave-stories/ArtikelProperties.story");
 	}
 }

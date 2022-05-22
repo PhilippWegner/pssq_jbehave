@@ -11,7 +11,7 @@ import de.pssq.akzeptanztest.pssq_akzeptanztest_04.business.Artikel;
 import de.pssq.akzeptanztest.pssq_akzeptanztest_04.gui.BasisControl;
 
 public class MwStBerechnungSteps {
-	private BasisControl basisControl;
+	private BasisControl basisControl = new BasisControl();
 	private Artikel artikel;
 
 	@BeforeStory
@@ -23,6 +23,8 @@ public class MwStBerechnungSteps {
 
 	@Given("An Ourdoor article with VAT costs $grossprice")
 	public void givenAnOurdoorArticleWithVATCostsgrossprice(double grossprice) {
+		this.basisControl.getArtikelListe().clear();
+		this.artikel = null;
 		this.artikel = new Artikel(1, "Wanderhose", 10, grossprice);
 	}
 
@@ -36,11 +38,6 @@ public class MwStBerechnungSteps {
 	@Then("The outdoor article price should be $netprice")
 	public void thenTheOutdoorArticlePriceShouldBenetprice(double netprice) {
 		Assert.assertTrue("Die Nettopreisberechnung ist nicht korrekt.", Math.abs(this.artikel.getPreis() - netprice) <= 0.01);
-//		assertThat("Die Nettopreisberechnung ist nicht korrekt.", false);
 	}
 
-	@AfterStory
-	public void openReport() {
-		System.out.println("DONE!");
-	}
 }
