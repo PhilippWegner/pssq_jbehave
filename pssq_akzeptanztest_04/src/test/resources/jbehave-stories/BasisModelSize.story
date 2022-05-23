@@ -4,7 +4,7 @@ moechte ich Artikel zu einer Liste hinzufuegen und loeschen können,
 damit ich den Überblick über meine Outrdoorartikel behalte.
 
 Scenario: 
-Ueberpruefe die Laenge der Artikelliste nach Hinzufuege- und Loeschvorgaenge
+Ueberpruefe die Laenge der Artikelliste nach Hinzufuege- und Loeschvorgaengen
 
 Given Eine leere Outdoorartikelliste
 When Ich drei Artikel in die Liste hinzufuege

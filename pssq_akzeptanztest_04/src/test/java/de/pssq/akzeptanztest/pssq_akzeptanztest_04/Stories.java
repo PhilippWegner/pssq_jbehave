@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.jbehave.core.configuration.Configuration;
+import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.StoryControls;
 import org.jbehave.core.failures.PassingUponPendingStep;
@@ -42,9 +43,10 @@ public class Stories extends JUnitStories {
 
 	public Stories() {
 		super();
+//		configuration = new MostUsefulConfiguration().useStoryReporterBuilder(new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE, Format.HTML, Format.TXT, Format.XML));
 		configuration = new Configuration() {};
 		configuration.useStoryReporterBuilder(
-				new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE, Format.HTML));
+				new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE, Format.HTML, Format.XML));
 
 		configuration.useFailureStrategy(new RethrowingFailure());
 		configuration.useKeywords(new LocalizedKeywords(Locale.ENGLISH));

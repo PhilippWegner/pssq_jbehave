@@ -79,7 +79,7 @@ public class Stories extends JUnitStories {
 		return new InstanceStepsFactory(configuration(), new HelloWorldSteps());
 	}
 	@Override
-	public List<String> storyPaths() {
+	protected List<String> storyPaths() {
 		return Arrays.asList("jbehave-stories/hello-world.story");
 	}
 }
