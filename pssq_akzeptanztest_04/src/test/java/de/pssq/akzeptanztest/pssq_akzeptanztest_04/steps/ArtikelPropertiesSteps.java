@@ -1,4 +1,4 @@
-package de.pssq.akzeptanztest.pssq_akzeptanztest_04;
+package de.pssq.akzeptanztest.pssq_akzeptanztest_04.steps;
 
 import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.BeforeStory;
@@ -8,7 +8,6 @@ import org.jbehave.core.annotations.When;
 import org.junit.Assert;
 
 import de.pssq.akzeptanztest.pssq_akzeptanztest_04.business.Artikel;
-import de.pssq.akzeptanztest.pssq_akzeptanztest_04.gui.BasisControl;
 
 public class ArtikelPropertiesSteps {
 	private Artikel article;

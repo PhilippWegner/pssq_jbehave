@@ -30,14 +30,19 @@ import org.jbehave.core.steps.StepFinder;
 
 import com.thoughtworks.paranamer.NullParanamer;
 
+import de.pssq.akzeptanztest.pssq_akzeptanztest_04.steps.ArtikelPropertiesSteps;
+import de.pssq.akzeptanztest.pssq_akzeptanztest_04.steps.BasisModelSizeSteps;
+import de.pssq.akzeptanztest.pssq_akzeptanztest_04.steps.MwStBerechnungSteps;
+import de.pssq.akzeptanztest.pssq_akzeptanztest_04.steps.WrongBasisModelSizeSteps;
+
+
 public class Stories extends JUnitStories {
 
 	private Configuration configuration;
 
 	public Stories() {
 		super();
-		configuration = new Configuration() {
-		};
+		configuration = new Configuration() {};
 		configuration.useStoryReporterBuilder(
 				new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE, Format.HTML));
 
@@ -78,11 +83,16 @@ public class Stories extends JUnitStories {
 
 	@Override
 	public InjectableStepsFactory stepsFactory() {
-		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps());
+		return new InstanceStepsFactory( configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps(), new BasisModelSizeSteps(), new WrongBasisModelSizeSteps());
 	}
 
 	@Override
 	protected List<String> storyPaths() {
-		return Arrays.asList("jbehave-stories/MwStBerechnung.story", "jbehave-stories/ArtikelProperties.story");
+		return Arrays.asList(
+				"jbehave-stories/MwStBerechnung.story", 
+				"jbehave-stories/ArtikelProperties.story", 
+				"jbehave-stories/BasisModelSize.story", 
+				"jbehave-stories/WrongBasisModelSize.story"
+		);
 	}
 }

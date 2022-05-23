@@ -3,7 +3,6 @@ package de.pssq.akzeptanztest.pssq_akzeptanztest_04.business;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-@SuppressWarnings("restriction")
 public class BasisModel {
 
 	private static BasisModel basisModel;
@@ -34,5 +33,7 @@ public class BasisModel {
 		this.artikelListe = artikelListe;
 	} 
 	
-	
+	public static void resetInstance() {
+		basisModel = null;
+	}
 }
