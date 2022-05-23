@@ -1,6 +1,7 @@
 Narrative:
-For the development of a functional article, 
-we need to know all of its properties.
+As a User of the outdoor article GUI
+I want to create an outdoor article and set all its properties
+In Order to see them correctly in my table view all getter and setters need to work properly.
 
 
 Scenario: 

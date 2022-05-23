@@ -2,7 +2,7 @@ Narrative:
 As User of our GUI,
 We want a functional VAT calculator for our Outdoor articles, 
 We need to know the basis of calculation.
-In Germany, the VAT is currently 19%. 
+In Germany VAT is currently 19%. 
 
 
 Scenario: 
