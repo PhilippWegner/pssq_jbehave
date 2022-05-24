@@ -1,8 +1,7 @@
 Narrative:
-As User of our GUI,
-We want a functional VAT calculator for our Outdoor articles, 
-We need to know the basis of calculation.
-In Germany VAT is currently 19%. 
+In order to get a functional VAT calculator for our Outdoor articles, 
+As a a user of our GUI
+I want to know the price excludet the VAT of 19%
 
 
 Scenario: 

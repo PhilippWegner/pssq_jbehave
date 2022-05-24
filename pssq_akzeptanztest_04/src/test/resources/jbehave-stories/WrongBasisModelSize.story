@@ -1,6 +1,7 @@
 Narrative:
-Als Nutzer der GUI zum Speichern von Outdoorartikeln,
-moechte ich Artikel zu einer Liste hinzufuegen und loeschen können,
+Zum Speichern von Outdoorartikeln, 
+Als Nutzer der GUI
+Möchte ich Artikel zu einer Liste hinzufuegen und loeschen können,
 damit ich den Überblick über meine Outrdoorartikel behalte.
 
 
