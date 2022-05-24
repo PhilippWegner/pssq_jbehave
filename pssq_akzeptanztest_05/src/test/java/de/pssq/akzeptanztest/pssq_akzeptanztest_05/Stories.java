@@ -40,57 +40,41 @@ import static org.jbehave.core.reporters.Format.XML;
  * {@link Embeddable} class to run multiple textual stories via JUnit.
  * </p>
  * <p>
- * Stories are specified in classpath and correspondingly the {@link LoadFromClasspath} story loader is configured.
- * </p> 
+ * Stories are specified in classpath and correspondingly the
+ * {@link LoadFromClasspath} story loader is configured.
+ * </p>
  */
 public class Stories extends JUnitStories {
-    
-    public Stories() {
-        configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
-                .doIgnoreFailureInView(true).useThreads(1).useStoryTimeouts("60");
-    }
 
-    @SuppressWarnings("exports")
+	public Stories() {
+		configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
+				.doIgnoreFailureInView(true).useThreads(1).useStoryTimeouts("60");
+	}
+
+	@SuppressWarnings("exports")
 	@Override
-    public Configuration configuration() {
-        Class<? extends Embeddable> embeddableClass = this.getClass();
-        LoadFromClasspath resourceLoader = new LoadFromClasspath(embeddableClass);
-        TableTransformers tableTransformers = new TableTransformers();
-        ParameterControls parameterControls = new ParameterControls();
-        // Start from default ParameterConverters instance
-        ParameterConverters parameterConverters = new ParameterConverters(resourceLoader, tableTransformers);
-        // factory to allow parameter conversion and loading from external resources (used by StoryParser too)
-        ExamplesTableFactory examplesTableFactory = new ExamplesTableFactory(new LocalizedKeywords(), resourceLoader,
-                parameterConverters, parameterControls, new TableParsers(new LocalizedKeywords(), parameterConverters), tableTransformers);
-        // add custom converters
-        parameterConverters.addConverters(new DateConverter(new SimpleDateFormat("yyyy-MM-dd")),
-                new ExamplesTableConverter(examplesTableFactory));
-        return new MostUsefulConfiguration()
-            .useStoryLoader(new LoadFromClasspath(embeddableClass))
-            .useStoryParser(new RegexStoryParser(examplesTableFactory)) 
-            .useStoryReporterBuilder(new StoryReporterBuilder()
-                .withCodeLocation(CodeLocations.codeLocationFromClass(embeddableClass))
-                .withDefaultFormats()
-                .withFormats(CONSOLE, TXT, HTML, XML))
-            .useParameterConverters(parameterConverters)
-            .useParameterControls(parameterControls)
-            .useTableTransformers(tableTransformers);
-    }
+	public Configuration configuration() {
+		Class<? extends Embeddable> embeddableClass = this.getClass();
+		// Start from default ParameterConverters instance
+		ParameterConverters parameterConverters = new ParameterConverters();
+		// add custom converters
+		parameterConverters.addConverters(new DateConverter(new SimpleDateFormat("yyyy-MM-dd")));
+		return new MostUsefulConfiguration().useStoryLoader(new LoadFromClasspath(embeddableClass))
+				.useStoryReporterBuilder(new StoryReporterBuilder()
+						.withCodeLocation(CodeLocations.codeLocationFromClass(embeddableClass)).withDefaultFormats()
+						.withFormats(CONSOLE, TXT, HTML, XML))
+				.useParameterConverters(parameterConverters);
+	}
 
-    @SuppressWarnings("exports")
+	@SuppressWarnings("exports")
 	@Override
-    public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(
-        		configuration()
-        		, new MwStBerechnungSteps()
-				, new ArtikelPropertiesSteps()
-				, new BasisModelSizeSteps()
-				, new WrongBasisModelSizeSteps()
-				, new ArtikelExceptionSteps()
-		);}
+	public InjectableStepsFactory stepsFactory() {
+		return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps(),
+				new BasisModelSizeSteps(), new WrongBasisModelSizeSteps(), new ArtikelExceptionSteps());
+	}
 
-    @Override
-    public List<String> storyPaths() {
-        return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
-    }
+	@Override
+	public List<String> storyPaths() {
+		return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
+	}
 }
