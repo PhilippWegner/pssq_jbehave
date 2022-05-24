@@ -12,6 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+	@SuppressWarnings("exports")
 	@Override
 	public void start(Stage primaryStage) {
 		try {

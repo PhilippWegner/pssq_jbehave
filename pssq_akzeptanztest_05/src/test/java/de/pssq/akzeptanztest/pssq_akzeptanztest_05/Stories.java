@@ -47,7 +47,8 @@ public class Stories extends JUnitStories {
                 .doIgnoreFailureInView(true).useThreads(1).useStoryTimeouts("60");
     }
 
-    @Override
+    @SuppressWarnings("exports")
+	@Override
     public Configuration configuration() {
         Class<? extends Embeddable> embeddableClass = this.getClass();
         LoadFromClasspath resourceLoader = new LoadFromClasspath(embeddableClass);
@@ -73,7 +74,8 @@ public class Stories extends JUnitStories {
             .useTableTransformers(tableTransformers);
     }
 
-    @Override
+    @SuppressWarnings("exports")
+	@Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps());
     }
