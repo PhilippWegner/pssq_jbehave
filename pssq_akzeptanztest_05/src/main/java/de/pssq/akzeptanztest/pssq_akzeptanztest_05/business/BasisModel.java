@@ -15,23 +15,27 @@ public class BasisModel {
 		return basisModel;
 	}
 
-	private BasisModel() {}
+	private BasisModel() {
+	}
 
 	public void fuegeArtikelHinzu(Artikel artikel) {
 		this.artikelListe.add(artikel);
 	}
-	
+
 	public void loescheArtikel(Artikel artikel) {
 		this.artikelListe.remove(artikel);
 	}
-	
+
 	public ObservableList<Artikel> getArtikelListe() {
 		return this.artikelListe;
 	}
 
 	public void setArtikelListe(ObservableList<Artikel> artikelListe) {
 		this.artikelListe = artikelListe;
-	} 
-	
-	
+	}
+
+	public static void resetInstance() {
+		basisModel = null;
+	}
+
 }

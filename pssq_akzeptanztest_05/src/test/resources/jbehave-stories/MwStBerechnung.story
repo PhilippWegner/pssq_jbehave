@@ -1,11 +1,11 @@
 Narrative:
-For the development of a functional VAT calculator, 
-we need to know the basis of calculation.
-In Germany, the VAT is currently 19%. 
+In order to get a functional VAT calculator for our Outdoor articles, 
+As a a user of our GUI
+I want to know the price excludet the VAT of 19%
 
 
 Scenario: 
-Calculate outdoor article price without VAT
+Calculate outdoor article price without VAT, also know as netprice
 
 Given An Ourdoor article with VAT costs <grossprice>
 When I want to know its netprice the calculator should divide 1,19

@@ -23,8 +23,11 @@ import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.ParameterConverters.ExamplesTableConverter;
 
+import de.pssq.akzeptanztest.pssq_akzeptanztest_05.steps.ArtikelExceptionSteps;
 import de.pssq.akzeptanztest.pssq_akzeptanztest_05.steps.ArtikelPropertiesSteps;
+import de.pssq.akzeptanztest.pssq_akzeptanztest_05.steps.BasisModelSizeSteps;
 import de.pssq.akzeptanztest.pssq_akzeptanztest_05.steps.MwStBerechnungSteps;
+import de.pssq.akzeptanztest.pssq_akzeptanztest_05.steps.WrongBasisModelSizeSteps;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
@@ -77,8 +80,14 @@ public class Stories extends JUnitStories {
     @SuppressWarnings("exports")
 	@Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new MwStBerechnungSteps(), new ArtikelPropertiesSteps());
-    }
+        return new InstanceStepsFactory(
+        		configuration()
+        		, new MwStBerechnungSteps()
+				, new ArtikelPropertiesSteps()
+				, new BasisModelSizeSteps()
+				, new WrongBasisModelSizeSteps()
+				, new ArtikelExceptionSteps()
+		);}
 
     @Override
     public List<String> storyPaths() {

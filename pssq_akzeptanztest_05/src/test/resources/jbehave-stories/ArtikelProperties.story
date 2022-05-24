@@ -1,6 +1,7 @@
 Narrative:
-For the development of a functional article, 
-we need to know all of its properties.
+In order to develop a function article, 
+As a developer
+I want to know all of its properties
 
 
 Scenario: 
