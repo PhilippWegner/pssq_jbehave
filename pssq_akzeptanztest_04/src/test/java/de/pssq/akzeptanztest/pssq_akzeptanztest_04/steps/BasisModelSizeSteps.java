@@ -21,9 +21,9 @@ public class BasisModelSizeSteps {
 	@BeforeStory
 	public void setUp() {
 		this.basisModel = BasisModel.getInstance();
-		this.artikel1 = null;
-		this.artikel2 = null;
-		this.artikel3 = null;
+		this.artikel1 = new Artikel();
+		this.artikel2 = new Artikel();
+		this.artikel3 = new Artikel();
 	}
 
 	@Given("Eine leere Outdoorartikelliste")

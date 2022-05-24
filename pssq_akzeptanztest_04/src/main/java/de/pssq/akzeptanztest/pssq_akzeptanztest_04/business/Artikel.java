@@ -19,6 +19,9 @@ public class Artikel {
 		return artikelID;
 	}
 	public void setArtikelID(int artikelID) {
+		if(artikelID < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.artikelID = artikelID;
 	}
 	public String getBezeichnung() {
